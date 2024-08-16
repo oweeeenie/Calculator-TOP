@@ -8,6 +8,18 @@
 
 body {
     background-color: #e79cb2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#calculator {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #btn-container {
@@ -15,8 +27,6 @@ body {
     flex-wrap: wrap;
     max-width: 400px;
     margin: auto;
-    margin-top: 250px;
-    gap: 0px;
     position: relative;
 }
 
@@ -64,4 +74,14 @@ body {
     background-color: #c3083f;
     font-weight: bolder;
 }
+
+#display {
+    width: 400px;
+    height: 125px;
+    font-size: 24px;
+    text-align: right;
+    background-color: #61041f;
+    color: #e8e9ea;
+}
+
 
