@@ -39,7 +39,7 @@ body {
     border: 1px solid darkgray;
     color: #e8e9ea;
     text-shadow: 0 0 7px rgba(255, 255, 255, 0.7);
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .btn-row {
@@ -72,16 +72,21 @@ body {
 
 .symbol {
     background-color: #c3083f;
-    font-weight: bolder;
+    font-weight: 600;
 }
 
 #display {
     width: 400px;
     height: 125px;
-    font-size: 24px;
+    font-size: 35px;
     text-align: right;
     background-color: #61041f;
     color: #e8e9ea;
+    line-height: 125px;
+    border: 1px solid #e8e9ea;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+    font-weight: bolder;
+    padding: 10px;
 }
 
 
