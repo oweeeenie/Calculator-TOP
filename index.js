@@ -46,6 +46,10 @@ function updateDisplay() {
 
 numberButtons.forEach(button => {
     button.addEventListener("click" , (e) => {          // (e) is a paramater. you can use whatever u want.
+        if (operator !== "") {
+            displayContent = "";
+            operator = "";
+        }
         if (e.target.textContent === "." && displayContent.includes(".")) return;
         displayContent += e.target.textContent;
         updateDisplay();
@@ -54,11 +58,27 @@ numberButtons.forEach(button => {
 
 operatorButtons.forEach(button => {
     button.addEventListener("click" , (e) => {
+        const clickedOperator = e.target.textContent;
         if (displayContent === "") return;
+        if (firstNumber === "") {
+            firstNumber = displayContent;
+            operator = e.target.textContent;
+            displayContent = "";
+      } else if (operator !== "") {
+        secondNumber = displayContent;
+        const result = operate(operator, parseFloat(firstNumber) , parseFloat(secondNumber));
+        displayContent = result.toString();
+        updateDisplay();
         firstNumber = displayContent;
         operator = e.target.textContent;
         displayContent = "";
-        }); 
+      } else {
+        operator = clickedOperator;
+      }
+    if (operator !== "") {
+        updateDisplay();
+    }
+    }); 
 });
 
 equalsButton.addEventListener("click" , () => {
@@ -72,7 +92,7 @@ equalsButton.addEventListener("click" , () => {
     secondNumber = "";
 });
 
-clearButton.addEventListener("click" , () => {
+ clearButton.addEventListener("click" , () => {
     displayContent = "";
     firstNumber = "";
     operator = "";
@@ -80,9 +100,10 @@ clearButton.addEventListener("click" , () => {
     updateDisplay();
 });
 
-deleteButton.addEventListener("click" , () => {
+deleteButton.addEventListener("click", () => {
     if (displayContent.length > 0) {
         displayContent = displayContent.slice(0, -1);
         updateDisplay();
     }
 });
+

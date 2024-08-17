@@ -68,6 +68,8 @@ body {
     bottom: 0;
     background-color: #3a0212;
     font-weight: bolder;
+    width: 100px;
+    border: 1px solid darkgray;
 }
 
 .symbol {
