@@ -72,9 +72,27 @@ body {
     border: 1px solid darkgray;
 }
 
-.symbol {
+.operation {
     background-color: #c3083f;
     font-weight: 600;
+}
+
+#delete {
+    background-color: #c3083f;
+    width: 100px;
+    height: 100px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid darkgray;
+    color: #e8e9ea;
+    text-shadow: 0 0 7px rgba(255, 255, 255, 0.7);
+    font-weight: 400;
+}
+
+#clear {
+    background-color: #c3083f;
 }
 
 #display {

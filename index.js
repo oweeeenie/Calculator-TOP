@@ -30,69 +30,71 @@ function operate(operator , numOne , numTwo) {
     }
 }
 
-const numberButtons = document.querySelectorAll(".btn:not(.symbol)");       //this is super cool, :not makes it so it only chooses THE NUMBERS/decimal. not symbols.
-const operatorButtons = document.querySelectorAll(".btn.symbol");
+const numberButtons = document.querySelectorAll(".btn:not(.operation)");
+const operatorButtons = document.querySelectorAll(".operation");
 const equalsButton = document.querySelector("#equals");
 const clearButton = document.querySelector("#clear");
 const deleteButton = document.querySelector("#delete");
+
 let displayContent = "";
-let firstNumber = ""
-let operator = ""
-let secondNumber = ""
+let firstNumber = "";
+let operator = "";
+let secondNumber = "";
 
 function updateDisplay() {
-    document.querySelector("#display").textContent = displayContent;
+    document.querySelector("#display").textContent = `${firstNumber} ${operator} ${displayContent}`;
 }
 
 numberButtons.forEach(button => {
-    button.addEventListener("click" , (e) => {          // (e) is a paramater. you can use whatever u want.
-        if (operator !== "") {
-            displayContent = "";
-            operator = "";
+    button.addEventListener("click", (e) => {
+        console.log("Number button clicked:", e.target.textContent);
+if (operator && displayContent === "" && !e.target.textContent.includes(".")) {
+            displayContent = e.target.textContent;
+        } else {
+            if (e.target.textContent === "." && displayContent.includes(".")) return;
+            displayContent += e.target.textContent;
         }
-        if (e.target.textContent === "." && displayContent.includes(".")) return;
-        displayContent += e.target.textContent;
         updateDisplay();
     });
 });
 
 operatorButtons.forEach(button => {
-    button.addEventListener("click" , (e) => {
+    button.addEventListener("click", (e) => {
         const clickedOperator = e.target.textContent;
-        if (displayContent === "") return;
+
+        if (displayContent === "" && operator === "") return;
+
         if (firstNumber === "") {
             firstNumber = displayContent;
-            operator = e.target.textContent;
+            operator = clickedOperator;
             displayContent = "";
-      } else if (operator !== "") {
-        secondNumber = displayContent;
-        const result = operate(operator, parseFloat(firstNumber) , parseFloat(secondNumber));
-        displayContent = result.toString();
+        } else if (operator !== "") {
+            secondNumber = displayContent;
+            const result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
+            displayContent = result.toString();
+            firstNumber = displayContent;
+            operator = clickedOperator;
+            displayContent = "";
+        } else {
+            operator = clickedOperator;
+        }
         updateDisplay();
-        firstNumber = displayContent;
-        operator = e.target.textContent;
-        displayContent = "";
-      } else {
-        operator = clickedOperator;
-      }
-    if (operator !== "") {
-        updateDisplay();
-    }
-    }); 
+    });
 });
 
-equalsButton.addEventListener("click" , () => {
-    if (displayContent === "" || firstNumber === "" || operator === "") return; // this is a guard, to make sure theres actual buttons clicked. doent execute below if no buttons are pressed.
+equalsButton.addEventListener("click", () => {
+    if (displayContent === "" || firstNumber === "" || operator === "") return;
+
     secondNumber = displayContent;
-    const result = operate(operator , parseFloat(firstNumber) , parseFloat(secondNumber));          // parsefloat convert strings to numbers.
+    const result = operate(operator, parseFloat(firstNumber), parseFloat(secondNumber));
     displayContent = result.toString();
-    updateDisplay();
-    firstNumber = "";           //the next 3 lines reset it for the calculcation.
+    firstNumber = "";
     operator = "";
     secondNumber = "";
+    updateDisplay();
 });
 
- clearButton.addEventListener("click" , () => {
+clearButton.addEventListener("click", () => {
     displayContent = "";
     firstNumber = "";
     operator = "";
@@ -101,9 +103,10 @@ equalsButton.addEventListener("click" , () => {
 });
 
 deleteButton.addEventListener("click", () => {
-    if (displayContent.length > 0) {
+    if (displayContent.length > 0) {    
         displayContent = displayContent.slice(0, -1);
         updateDisplay();
     }
 });
+
 
