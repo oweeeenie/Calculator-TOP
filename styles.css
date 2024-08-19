@@ -7,12 +7,22 @@
 }
 
 body {
-    background-color: #e79cb2;
+    background-image: url('./numbers.jpg');
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    overflow: hidden;
+}
+
+#particles-js {
+    width: 100%;
+    height: 100%;
+    position: absolute;         /* keeps this from moving other elements and takes up all space still. */
+    top: 0;
+    left: 0;
+    
 }
 
 #calculator {
@@ -40,6 +50,13 @@ body {
     color: #e8e9ea;
     text-shadow: 0 0 7px rgba(255, 255, 255, 0.7);
     font-weight: 400;
+    transition: transform 0.1s ease, box-shadow 0.1s ease; /* Add transition for smooth effect */
+    opacity: 95%;
+}
+
+.btn:active {
+    transform: scale(0.95); /* Scale the button slightly smaller */
+   
 }
 
 .btn-row {
@@ -70,11 +87,18 @@ body {
     font-weight: bolder;
     width: 100px;
     border: 1px solid darkgray;
+    transition: transform 0.1s ease, box-shadow 0.1s ease; /* Add transition for smooth effect */
+    opacity: 97%;
+}
+
+#equals:active {
+    transform: scale(0.95);
 }
 
 .operation {
     background-color: #c3083f;
     font-weight: 600;
+    opacity: 85%;
 }
 
 #delete {
@@ -89,10 +113,18 @@ body {
     color: #e8e9ea;
     text-shadow: 0 0 7px rgba(255, 255, 255, 0.7);
     font-weight: 400;
+    transition: transform 0.1s ease, box-shadow 0.1s ease; /* Add transition for smooth effect */
+    opacity: 85%;
 }
+
+#delete:active {
+    transform: scale(0.95); /* Scale the button slightly smaller */
+}
+
 
 #clear {
     background-color: #c3083f;
+    opacity: 85%;
 }
 
 #display {
@@ -107,6 +139,9 @@ body {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
     font-weight: bolder;
     padding: 10px;
+    overflow: hidden; /* required for ellipsis to work as well! */
+    text-overflow: ellipsis; /* Adds "..." if text overflows */
+    opacity: 95%;
 }
 
 
